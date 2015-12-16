@@ -89,6 +89,8 @@ task :build do
                 OmnibusFlapjack::Helpers.build_omnibus_cmd(pkg)
 
   container_name = "flapjack-build-#{pkg.distro_release}"
+  
+  repository = ENV["REPOSITORY_URL"] || 'https://github.com/flapjack/flapjack.git'
 
   docker_cmd_string = [
     'docker', 'run', '-t',
@@ -99,6 +101,7 @@ task :build do
     '-e', "FLAPJACK_BUILD_REF=#{pkg.build_ref}",
     '-e', "FLAPJACK_EXPERIMENTAL_PACKAGE_VERSION=#{pkg.experimental_package_version}",
     '-e', "FLAPJACK_MAIN_PACKAGE_VERSION=#{pkg.main_package_version}",
+    '-e', "FLAPJACK_REPOSITORY_URL="+repository
     '-e', "DISTRO_RELEASE=#{pkg.distro_release}",
     '-e', "OFFICIAL_FLAPJACK_PACKAGE=#{official_pkg}",
     "-v", "#{Dir.home}/.gnupg:/root/.gnupg",

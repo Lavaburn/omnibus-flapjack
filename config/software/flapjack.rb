@@ -2,9 +2,11 @@ name "flapjack"
 
 build_ref = ENV['FLAPJACK_BUILD_REF']
 package_version = ENV['FLAPJACK_EXPERIMENTAL_PACKAGE_VERSION']
+repository = ENV['FLAPJACK_REPOSITORY_URL']  
 
 raise "FLAPJACK_BUILD_REF must be set" unless build_ref
 raise "FLAPJACK_EXPERIMENTAL_PACKAGE_VERSION must be set" unless package_version
+raise "FLAPJACK_REPOSITORY_URL must be set" unless repository
 
 default_version package_version
 
@@ -25,6 +27,11 @@ omnibus_flapjack_path = Dir.pwd
 
 build do
   command "if [ ! -d flapjack_source ] ; then git clone https://github.com/flapjack/flapjack.git flapjack_source ; fi"
+  command "cd flapjack_source && " \
+          "git checkout master && " \
+          "git pull && " \
+          "git checkout #{build_ref} && " \
+  command "if [ ! -d flapjack_source ] ; then git clone "+repository+" flapjack_source ; fi"
   command "cd flapjack_source && " \
           "git checkout master && " \
           "git pull && " \

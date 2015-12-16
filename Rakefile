@@ -8,6 +8,8 @@
 # DRY_RUN                   - if set, just shows what would be gone (Optiona, Default: nil)
 # OFFICIAL_FLAPJACK_PACKAGE - if true, assuming that the Flapjack Signing Key is on the system, and sign the rpm package
 # FLAPJACK_COMPONENT        - the component of the Flapjack repository to use for the post-package-testing used in build_and_publish and promote_and_verify (options: experimental or main)
+# GITHUB_USER               - Github user name (default: flapjack)
+# GITHUB_PROJECT            - Github project name (default: flapjack)
 
 # eg:
 #   bundle
@@ -46,11 +48,16 @@ end
 
 desc "Build Flapjack packages"
 task :build do
+  github_user = ENV["GITHUB_USER"] || 'flapjack'
+  github_project = ENV["GITHUB_PROJECT"] || 'flapjack'
+  
   begin
     pkg ||= OmnibusFlapjack::Package.new(
       :build_ref      => ENV['BUILD_REF'],
       :distro         => ENV['DISTRO'],
       :distro_release => ENV['DISTRO_RELEASE'],
+      :github_user    => github_user,
+      :github_project => github_project,
     )
   rescue ArgumentError
     puts "To build, please set the following environment variables as appropriate:"
@@ -108,8 +115,6 @@ task :build do
 
   container_name = "flapjack-build-#{pkg.distro_release}"
   
-  repository = ENV["REPOSITORY_URL"] || 'https://github.com/flapjack/flapjack.git'
-
   docker_cmd_string = [
     'docker', 'run', '-t',
     '--attach', 'stdout',
@@ -119,7 +124,8 @@ task :build do
     '-e', "FLAPJACK_BUILD_REF=#{pkg.build_ref}",
     '-e', "FLAPJACK_EXPERIMENTAL_PACKAGE_VERSION=#{pkg.experimental_package_version}",
     '-e', "FLAPJACK_MAIN_PACKAGE_VERSION=#{pkg.main_package_version}",
-    '-e', "FLAPJACK_REPOSITORY_URL="+repository,
+    '-e', "FLAPJACK_GITHUB_USER="+github_user,
+    '-e', "FLAPJACK_GITHUB_PROJECT="+github_project,
     '-e', "DISTRO_RELEASE=#{pkg.distro_release}",
     '-e', "OFFICIAL_FLAPJACK_PACKAGE=#{official_pkg}",
     "-v", "#{Dir.home}/.gnupg:/root/.gnupg",

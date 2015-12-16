@@ -74,7 +74,7 @@ module OmnibusFlapjack
           "#{simple_version}#{addendum}"
         end
       else
-        version_url = "https://raw.githubusercontent.com/flapjack/flapjack/" \
+        version_url = "https://raw.githubusercontent.com/"+@github_user+"/"+@github_project+"/" \
                       "#{build_ref}/lib/flapjack/version.rb"
         open(version_url) {|f|
           f.each_line {|line|
@@ -188,6 +188,8 @@ module OmnibusFlapjack
       @distro         = options[:distro]
       @distro_release = options[:distro_release]
       @package_file   = options[:package_file]
+      @github_user    = options[:github_user]
+      @github_project = options[:github_project]
       unless (@build_ref && @distro && @distro_release) || @package_file
         raise ArgumentError, "cannot initialize package"
       end

@@ -2,11 +2,13 @@ name "flapjack"
 
 build_ref = ENV['FLAPJACK_BUILD_REF']
 package_version = ENV['FLAPJACK_EXPERIMENTAL_PACKAGE_VERSION']
-repository = ENV['FLAPJACK_REPOSITORY_URL']  
+github_user = ENV['FLAPJACK_GITHUB_USER']
+github_project = ENV['FLAPJACK_GITHUB_PROJECT']
 
 raise "FLAPJACK_BUILD_REF must be set" unless build_ref
 raise "FLAPJACK_EXPERIMENTAL_PACKAGE_VERSION must be set" unless package_version
-raise "FLAPJACK_REPOSITORY_URL must be set" unless repository
+raise "FLAPJACK_GITHUB_USER must be set" unless github_user
+raise "FLAPJACK_GITHUB_PROJECT must be set" unless github_project
 
 default_version package_version
 
@@ -24,6 +26,8 @@ relative_path "flapjack"
 
 etc_path = "#{install_dir}/embedded/etc"
 omnibus_flapjack_path = Dir.pwd
+
+repository = 'https://github.com/'+github_user+'/'+github_project+'.git'
 
 build do
   command "if [ ! -d flapjack_source ] ; then git clone "+repository+" flapjack_source ; fi"

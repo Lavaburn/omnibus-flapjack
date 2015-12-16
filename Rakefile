@@ -10,6 +10,7 @@
 # FLAPJACK_COMPONENT        - the component of the Flapjack repository to use for the post-package-testing used in build_and_publish and promote_and_verify (options: experimental or main)
 # GITHUB_USER               - Github user name (default: flapjack)
 # GITHUB_PROJECT            - Github project name (default: flapjack)
+# DOCKER_OWNER              - Custom Docker Image (default: flapjack - for the official docker image)
 
 # eg:
 #   bundle
@@ -47,6 +48,7 @@ desc "Build Flapjack packages"
 task :build do
   github_user = ENV["GITHUB_USER"] || 'flapjack'
   github_project = ENV["GITHUB_PROJECT"] || 'flapjack'
+  docker_owner = ENV["DOCKER_OWNER"] || 'flapjack'
   
   begin
     pkg ||= OmnibusFlapjack::Package.new(
@@ -111,7 +113,7 @@ task :build do
     '-e', "DISTRO_RELEASE=#{pkg.distro_release}",
     '-e', "OFFICIAL_FLAPJACK_PACKAGE=#{official_pkg}",
     "-v", "#{Dir.home}/.gnupg:/root/.gnupg",
-    "flapjack/omnibus-#{pkg.distro}:#{pkg.distro_release}", 'bash', '-l', '-c',
+    docker_owner+"/omnibus-#{pkg.distro}:#{pkg.distro_release}", 'bash', '-l', '-c',
     "\'#{omnibus_cmd}\'"
   ].join(" ")
   puts "Executing: " + docker_cmd_string

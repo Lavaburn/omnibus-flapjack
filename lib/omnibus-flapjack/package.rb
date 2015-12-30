@@ -188,8 +188,8 @@ module OmnibusFlapjack
       @distro         = options[:distro]
       @distro_release = options[:distro_release]
       @package_file   = options[:package_file]
-      @github_user    = options[:github_user]
-      @github_project = options[:github_project]
+      @github_user    = options[:github_user] || 'flapjack'
+      @github_project = options[:github_project] || 'flapjack'
       unless (@build_ref && @distro && @distro_release) || @package_file
         raise ArgumentError, "cannot initialize package"
       end

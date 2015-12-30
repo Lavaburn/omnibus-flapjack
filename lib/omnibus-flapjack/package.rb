@@ -74,7 +74,6 @@ module OmnibusFlapjack
           "#{simple_version}#{addendum}"
         end
       else
-        version_url = "https://raw.githubusercontent.com/flapjack/flapjack/" \
         version_url = "https://raw.githubusercontent.com/"+@github_user+"/"+@github_project+"/" \
                       "#{build_ref}/lib/flapjack/version.rb"
         open(version_url) {|f|

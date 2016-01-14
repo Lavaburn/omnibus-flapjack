@@ -69,7 +69,7 @@ module OmnibusFlapjack
         "git checkout #{current_commit}",
         "cp .rpmmacros ~/.rpmmacros",
         "bundle update omnibus",
-        "bundle update omnibus-software",
+#        "bundle update omnibus-software",
         "bundle install --binstubs",
         "bin/omnibus build --log-level=info " +
           "--override use_s3_caching:false " +

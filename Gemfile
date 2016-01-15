@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'omnibus-software', :github => 'opscode/omnibus-software', :ref => '0428549848dec70d2c0814ba50d5d9d19f63f9d1'
-gem 'omnibus', :github => 'SarahKowalik/omnibus', :ref => 'c95992785881e948e09091961941f63654a0cb46'
+gem 'omnibus-software', :github => 'chef/omnibus-software'
+gem 'omnibus', :github => 'chef/omnibus'
 gem 'mixlib-log'
 gem 'mixlib-shellout', '>=1.6.1'
 gem 'rake'

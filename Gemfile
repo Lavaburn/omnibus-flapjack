@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'omnibus-software', :github => 'opscode/omnibus-software', :ref => '914e98328edc072f0563f32409f107bc5adaaa70'	# 8 May 2015
+gem 'omnibus-software', :github => 'opscode/omnibus-software', :ref => '0428549848dec70d2c0814ba50d5d9d19f63f9d1'
 gem 'omnibus', :github => 'SarahKowalik/omnibus'	# 8 May 2015
 gem 'mixlib-log'
 gem 'mixlib-shellout', '>=1.6.1'

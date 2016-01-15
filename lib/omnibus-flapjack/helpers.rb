@@ -68,7 +68,7 @@ module OmnibusFlapjack
         "git pull",
         "git checkout #{current_commit}",
         "cp .rpmmacros ~/.rpmmacros",
-        "bundle update omnibus",
+#        "bundle update omnibus",
 #        "bundle update omnibus-software",
         "bundle install --binstubs",
         "bin/omnibus build --log-level=info " +

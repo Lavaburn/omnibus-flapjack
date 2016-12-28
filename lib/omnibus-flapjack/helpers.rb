@@ -63,7 +63,11 @@ module OmnibusFlapjack
 
       omnibus_cmd = [
         "if [[ -f /opt/rh/ruby193/enable ]]; then source /opt/rh/ruby193/enable; fi",
-        "export PATH=$PATH:/usr/local/go/bin",
+        # Upgrade to go 1.7
+        "curl https://storage.googleapis.com/golang/go1.7.4.linux-amd64.tar.gz  > /tmp/go.tar.gz",       
+        "rm -rf /usr/local/go/", 
+        "tar -C /usr/local -xzf /tmp/go.tar.gz",   
+        "export PATH=$PATH:/usr/local/go/bin",        
         "cd omnibus-flapjack",
         "git pull",
         "git checkout #{current_commit}",
@@ -71,6 +75,7 @@ module OmnibusFlapjack
 #        "bundle update omnibus",
 #        "bundle update omnibus-software",
         "bundle install --binstubs",
+        "patch -d / -p0 < compat_2017.diff",
         "bin/omnibus build --log-level=info " +
           "--override use_s3_caching:false " +
           "--override use_git_caching:true " +

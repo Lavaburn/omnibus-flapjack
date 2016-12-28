@@ -1,0 +1,42 @@
+--- /tmp/cacerts.rb	2016-12-28 20:20:23.298225104 +0000
++++ /var/lib/gems/1.9.1/bundler/gems/omnibus-software-0428549848de/config/software/cacerts.rb	2016-12-28 20:35:47.174363976 +0000
+@@ -17,7 +17,12 @@
+ name "cacerts"
+ 
+ # Date of the file is in a comment at the start, or in the changelog
+-default_version "2015.10.28"
++default_version "2016-11-02"
++
++version "2016-11-02" do
++  source md5: "11713bf9b8c10aca2fb4708f1ba01072"
++  source url: "https://curl.haxx.se/ca/cacert-2016-11-02.pem"
++end
+ 
+ version "2015.10.28" do
+   source md5: "6f41fb0f0c4b4695c2a6296892278141"
+@@ -55,8 +60,6 @@
+   source md5: "5d108f8ab86afacc6663aafca8604dd3"
+ end
+ 
+-source url: "http://curl.haxx.se/ca/cacert.pem"
+-
+ relative_path "cacerts-#{version}"
+ 
+ build do
+@@ -64,12 +67,12 @@
+ 
+   # Append the 1024bit Verisign certs so that S3 continues to work
+   block do
+-    unless File.foreach("#{project_dir}/cacert.pem").grep(/^Verisign Class 3 Public Primary Certification Authority$/).any?
+-      File.open("#{project_dir}/cacert.pem", "a") { |fd| fd.write(VERISIGN_CERTS) }
++    unless File.foreach("#{project_dir}/cacert-#{version}.pem").grep(/^Verisign Class 3 Public Primary Certification Authority$/).any?
++      File.open("#{project_dir}/cacert-#{version}.pem", "a") { |fd| fd.write(VERISIGN_CERTS) }
+     end
+   end
+ 
+-  copy "#{project_dir}/cacert.pem", "#{install_dir}/embedded/ssl/certs/cacert.pem"
++  copy "#{project_dir}/cacert-#{version}.pem", "#{install_dir}/embedded/ssl/certs/cacert.pem"
+ 
+   # Windows does not support symlinks
+   unless windows?
+

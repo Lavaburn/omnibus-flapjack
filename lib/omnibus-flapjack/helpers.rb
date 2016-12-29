@@ -78,7 +78,7 @@ module OmnibusFlapjack
         "patch -d / -p0 < compat_2017.diff",
         "bin/omnibus build --log-level=info " +
           "--override use_s3_caching:false " +
-          "--override use_git_caching:true " +
+          "--override use_git_caching:false " +
           "flapjack",
         "cd /omnibus-flapjack/pkg"
       ]

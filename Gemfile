@@ -5,12 +5,13 @@ gem 'public_suffix', '<=1.4.6'
 gem 'rack', '<=1.6.5'
 gem 'json', '<=1.8.3'
 gem 'nokogiri', '<=1.6.8.1'
+gem 'rake', '<=10.5.0'
+gem 'mixlib-config', '<=2.2.4'
 
 gem 'omnibus-software', :github => 'opscode/omnibus-software', :ref => '0428549848dec70d2c0814ba50d5d9d19f63f9d1'
 gem 'omnibus', :github => 'SarahKowalik/omnibus'	# 8 May 2015
 gem 'mixlib-log'
 gem 'mixlib-shellout', '>=1.6.1'
-gem 'rake'
 gem 'pry'
 gem 'cinch'
 gem 'chronic_duration'
@@ -23,6 +24,6 @@ group :development, :test do
   gem 'serverspec'
   gem 'specinfra'
   gem 'capybara'
-  gem 'poltergeist', require: false
+  gem 'poltergeist'
   gem 'pry-rescue'
 end

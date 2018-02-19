@@ -7,6 +7,8 @@ gem 'json', '<=1.8.3'
 gem 'nokogiri', '<=1.6.8.1'
 gem 'rake', '<=10.5.0'
 gem 'mixlib-config', '<=2.2.4'
+gem 'rack-test', '<=0.7.0'
+gem 'ffi', '<=1.9.9'
 
 gem 'omnibus-software', :github => 'opscode/omnibus-software', :ref => '0428549848dec70d2c0814ba50d5d9d19f63f9d1'
 gem 'omnibus', :github => 'SarahKowalik/omnibus'	# 8 May 2015

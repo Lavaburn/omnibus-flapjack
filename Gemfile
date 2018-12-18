@@ -12,7 +12,7 @@ gem 'ffi', '<=1.9.9'
 
 gem 'omnibus-software', :github => 'opscode/omnibus-software', :ref => '0428549848dec70d2c0814ba50d5d9d19f63f9d1'
 gem 'omnibus', :github => 'SarahKowalik/omnibus'	# 8 May 2015
-gem 'mixlib-log'
+gem 'mixlib-log', '<=1.7.1'
 gem 'mixlib-shellout', '>=1.6.1'
 gem 'pry'
 gem 'cinch'
